@@ -1,4 +1,4 @@
-use log::{error, info};
+use log::info;
 use r2d2::Pool;
 use redis::{Commands, Client};
 
@@ -19,7 +19,7 @@ fn main() {
 
 fn try_get(pool:Pool<Client>){
     let mut client = pool.get().unwrap();
-    let val: String = client.get("hoge").unwrap_or("null".to_string());
+    let val: String = client.get("hoge").unwrap_or_else(|_| "null".to_string());
     info!("get {}", val);
 }
 
