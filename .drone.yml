@@ -1,0 +1,17 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: cargo-run
+    image: rust:1.54
+    environment:
+      REDIS_HOST: redis
+      RUST_LOG: debug
+    commands:
+      - cargo run    
+
+services:
+  - name: redis
+    image: redis:6.2.5
